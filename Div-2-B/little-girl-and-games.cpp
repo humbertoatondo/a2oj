@@ -27,25 +27,26 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
-    }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    string word;
+    cin >> word;
+    int odds = 0;
+    map<char, int> letters;
+    for (char c : word) {
+        letters[c]++;
+        if (letters[c] % 2 == 1) {
+            odds++;
+        }
+        else {
+            odds--;
         }
     }
-    cout << res << endl;
+
+    if (odds % 2 == 1 || !odds) {
+        cout << "First" << endl;
+    }
+    else {
+        cout << "Second" << endl;
+    }
+
     return 0;
 }

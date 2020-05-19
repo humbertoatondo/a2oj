@@ -27,25 +27,34 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
+    multiset<int> comp;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        int a;
+        cin >> a;
+        comp.insert(a);
+    }
+    vi rem;
+    rep (i, m) {
+        int b;
+        cin >> b;
+        if (comp.find(b) == comp.end()) {
+            rem.push_back(b);
+            continue;
+        }
+        comp.erase(comp.lower_bound(b));
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int pos = 0;
+    auto it = comp.begin();
+    for (int i = 0; i < rem.size() && it != comp.end(); i++) {
+        if (rem[i] >= *it) {
+            pos++;
+            it++;
         }
     }
-    cout << res << endl;
+
+    cout << comp.size() - pos << endl;
     return 0;
 }

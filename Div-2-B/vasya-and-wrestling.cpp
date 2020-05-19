@@ -27,25 +27,49 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
     int n;
     cin >> n;
+    vi fi, se;
+    ll wf = 0, ws = 0;
+    ll a;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
-    }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+        cin >> a;
+        if (a > 0) {
+            wf += a;
+            fi.push_back(a);
+        }
+        else {
+            ws += -a;
+            se.push_back(-a);
         }
     }
-    cout << res << endl;
+
+    if (wf > ws) {
+        cout << "first" << endl;
+        return 0;
+    }
+    else if (wf < ws) {
+        cout << "second" << endl;
+        return 0;
+    }
+
+    int size = max(fi.size(), se.size());
+    for (int i = 0; i < size; i++) {
+        if (fi[i] > se[i]) {
+            cout << "first" << endl;
+            return 0;
+        }
+        else if (fi[i] < se[i]) {
+            cout << "second" << endl;
+            return 0;
+        }
+    }
+
+    if (a < 0) {
+        cout << "second" << endl;
+    }
+    else {
+        cout << "first" << endl;
+    }
     return 0;
 }

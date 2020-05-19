@@ -27,25 +27,46 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
     int n;
     cin >> n;
+    vi nums;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        int a;
+        cin >> a;
+        nums.push_back(a);
+    }
+    if (n <= 2) {
+        cout << n << endl;
+        return 0;
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    vi left(n, 1), right(n, 1);
+    int curr = 2;
+    for (int i = 1; i < nums.size(); i++) {
+        if (nums[i] - nums[i - 1] >= 0) {
+            left[i] = curr;
+            curr++;
+        }
+        else {
+            curr = 2;
         }
     }
-    cout << res << endl;
+
+    curr = 2;
+    for (int i = n - 2; i >= 0; i--) {
+        if (nums[i] - nums[i + 1] >= 0) {
+            right[i] = curr;
+            curr++;
+        }
+        else {
+            curr = 2;
+        }
+    }
+
+    int best = 0;
+    for (int i = 0; i < n; i++) {
+        best = max(best, left[i] + right[i]);
+    }
+    cout << best - 1 << endl;
     return 0;
 }

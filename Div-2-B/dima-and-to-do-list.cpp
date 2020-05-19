@@ -27,25 +27,27 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
+    vi nums;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        int a;
+        cin >> a;
+        nums.push_back(a);
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int best = INT_MAX;
+    int idx;
+    for (int i = 0; i < k; i++) {
+        int total = 0;
+        for (int co = 0, j = i; co < nums.size(); j += k, co += k) {
+            total += nums[j % (nums.size())];
+        }
+        if (total < best) {
+            best = total;
+            idx = i;
         }
     }
-    cout << res << endl;
+    cout << idx + 1 << endl;
     return 0;
 }

@@ -27,25 +27,42 @@ void c_p_c()
 int main()
 {
     c_p_c();
+    int d, st;
+    int low = 0, high = 0;
+    cin >> d >> st;
     vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
+    rep (i, d) {
         int a, b;
         cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        low += a;
+        high += b;
+        nums.push_back(make_pair(a, b));
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
+    if (st < low || st > high) {
+        cout << "NO" << endl;
+        return 0;
+    }
+
+    vi res(d);
+    for (int i = 0; i < nums.size(); i++) {
+        res[i] = nums[i].first;
+    }
+
+    int rem = st - low;
+    while (rem) {
+        for (int i = 0; i < nums.size() && rem; i++) {
+            if (res[i] < nums[i].second) {
+                res[i]++;
+                rem--;
             }
         }
     }
-    cout << res << endl;
+
+    cout << "YES" << endl;
+    for (int num : res) {
+        cout << num << " ";
+    }
+    cout << endl;
     return 0;
 }

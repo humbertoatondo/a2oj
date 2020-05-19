@@ -27,24 +27,21 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
     int n;
     cin >> n;
+    string res = "";
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        res += ' ';
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
+    char l = 'a';
+    rep (i, n) {
+        for (int k = i; k < n; k += 4) {
+            if (res[k] == ' ') {
+                res[k] = l;
             }
         }
+        l++;
     }
     cout << res << endl;
     return 0;

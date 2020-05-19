@@ -27,25 +27,23 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
+    int n, m;
+    cin >> n >> m;
+    set<int> blocked;
+    rep (i, m) {
         int a, b;
         cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        blocked.insert(a);
+        blocked.insert(b);
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int t = 1;
+    while (blocked.find(t) != blocked.end()) t++;
+    cout << n - 1 << endl;
+    for (int i = 1; i <= n; i++) {
+        if (i != t) {
+            cout << i << " " << t << endl;
         }
     }
-    cout << res << endl;
     return 0;
 }

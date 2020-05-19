@@ -27,25 +27,22 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
+    unordered_map<int, int> home;
     int n;
     cin >> n;
+    vii teams(n);
     rep (i, n) {
         int a, b;
         cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        teams[i] = make_pair(a, b);
+        home[a]++;
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
-        }
+    for (auto team : teams) {
+        int h = n - 1;
+        int v = n - 1;
+        int val = home[team.second];
+        cout << h + val << " " << v - val << endl;
     }
-    cout << res << endl;
     return 0;
 }

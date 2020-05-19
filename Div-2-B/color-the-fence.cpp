@@ -27,25 +27,46 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
     int n;
     cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+    vi digits, nums;
+    ii mi = make_pair(INT_MAX, 0);
+    rep (i, 9) {
+        int a;
+        cin >> a;
+        if (a < mi.first) {
+            mi = make_pair(a, i + 1);
+        }
+        digits.push_back(a);
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int len = n / mi.first;
+    if (!len) {
+        cout << -1 << endl;
+        return 0;
+    }
+    int v = n % (len * mi.first);
+
+
+    int right = 8;
+    while (right >= 0 && v + mi.first < digits[right]) right--;
+    for (int i = 0; i < len; i++) {
+        if (right < 0) break;
+        if (v + mi.first >= digits[right]) {
+            v += mi.first;
+            v -= digits[right];
+            cout << right + 1;
+        }
+        else {
+            right--;
+            i--;
         }
     }
-    cout << res << endl;
+    cout << endl;
     return 0;
 }
+
+/*
+898207
+99745 99746 99748 99752 99760 99776 99808 99872 100000
+*/

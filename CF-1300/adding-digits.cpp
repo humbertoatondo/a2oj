@@ -23,29 +23,29 @@ void c_p_c()
 /***********************************************************/
 /************************   Start   ************************/
 /***********************************************************/
+int get_digits(int num) {
+    int c = 1;
+    while (num /= 10 ) c++;
+    return c;
+}
 
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
-    }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
+    int a, b, n;
+    cin >> a >> b >> n;
+    a *= 10;
+    n--;
+    for (int i = 0; i < 10; i++) {
+        if ((a + i) % b == 0) {
+            cout << a + i;
+            while (n--) {
+                cout << 0;
             }
+            cout << endl;
+            return 0;
         }
     }
-    cout << res << endl;
+    cout << -1 << endl;
     return 0;
 }

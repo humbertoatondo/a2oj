@@ -27,25 +27,23 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
-    }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    string num;
+    cin >> num;
+    map<char, int> lucky;
+    for (char c : num) {
+        if (c == '7' || c == '4') {
+            lucky[c]++;
         }
     }
-    cout << res << endl;
+
+    if (lucky.empty()) {
+        cout << -1 << endl;
+    }
+    else if (lucky['7'] == lucky['4'] || lucky['7'] < lucky['4']) {
+        cout << 4 << endl;
+    }
+    else {
+        cout << 7 << endl;
+    }
     return 0;
 }

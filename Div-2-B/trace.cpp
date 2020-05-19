@@ -27,25 +27,21 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
     int n;
     cin >> n;
+    const double PI = 3.141592653589;
+    vector<double> nums;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        double a;
+        cin >> a;
+        nums.push_back(a);
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
-        }
+    sort(nums.rbegin(), nums.rend());
+    double res = 0;
+    for (int i = 0; i < n; i += 2) {
+        res += pow(nums[i], 2) - pow(nums[i + 1], 2);
     }
-    cout << res << endl;
+    cout << fixed << setprecision(10) << res * PI << endl;
     return 0;
 }

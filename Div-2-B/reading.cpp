@@ -27,25 +27,28 @@ void c_p_c()
 int main()
 {
     c_p_c();
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    int n, k;
+    cin >> n >> k;
     vii nums;
-    int n;
-    cin >> n;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        int a;
+        cin >> a;
+        nums.push_back(make_pair(a, i + 1));
     }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
-        }
+    sort(nums.rbegin(), nums.rend());
+    int mi;
+    vi res;
+    for (int i = 0; i < k; i++) {
+        res.push_back(nums[i].second);
+        mi = nums[i].first;
     }
-    cout << res << endl;
+    sort(res.begin(), res.end());
+    cout << mi << endl;
+    for (int num : res) {
+        cout << num << " ";
+    }
+    cout << endl;
     return 0;
 }

@@ -27,25 +27,30 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
+    vii troopers;
+    int n, x, y;
+    cin >> n >> x >> y;
     rep (i, n) {
         int a, b;
         cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        troopers.push_back(make_pair(a, b));
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
+    int cnt = 0;
+    set<ii> visited;
+    for (int i = 0; i < troopers.size(); i++) {
+        if (visited.find(troopers[i]) != visited.end()) {
+            continue;
+        }
+        cnt++;
+        for (int j = i + 1; j < troopers.size(); j++) {
+            int left = (troopers[i].second - y) * (troopers[j].first - x);
+            int right = (troopers[j].second - y) * (troopers[i].first - x);
+            if (left == right && visited.find(troopers[j]) == visited.end()) {
+                visited.insert(troopers[j]);
             }
         }
     }
-    cout << res << endl;
+    cout << cnt << endl;
     return 0;
 }

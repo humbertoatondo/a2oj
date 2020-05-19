@@ -27,25 +27,31 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
+    vi piles;
+    int ma = 0;
+    int mi = INT_MAX;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        int a;
+        cin >> a;
+        piles.push_back(a);
+        ma = max(ma, a);
+        mi = min(mi, a);
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
-        }
+    if (ma - mi > k) {
+        cout << "NO" << endl;
+        return 0;
     }
-    cout << res << endl;
+
+    cout << "YES" << endl;
+    for (int pile : piles) {
+        for (int i = 0; i < pile; i++) {
+            cout << (i % k) + 1<< " ";
+        }
+        cout << endl;
+    }
+
     return 0;
 }

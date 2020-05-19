@@ -27,25 +27,31 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
+    vs grid;
     rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+        string row;
+        cin >> row;
+        grid.push_back(row);
     }
-
-    int res = n;
+    
+    int count = 0;
+    vii pos { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == 'P') {
+                for (auto p : pos) {
+                    if (i + p.first >= 0 && i + p.first < n && j + p.second >= 0 && j + p.second < m && grid[i + p.first][j + p.second] == 'W') {
+                        count++;
+                        grid[i][j] = '.';
+                        grid[i + p.first][j + p.second] = '.';
+                        break;
+                    }
+                }
             }
         }
     }
-    cout << res << endl;
+    cout << count << endl;
     return 0;
 }

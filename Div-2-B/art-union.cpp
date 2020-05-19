@@ -27,25 +27,24 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
-    }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int m, n;
+    cin >> m >> n;
+    vvi grid(m + 1, vi(n + 1, 0));
+    rep (i, m) {
+        rep (j, n) {
+            int a;
+            cin >> a;
+            grid[i + 1][j + 1] = a;
         }
     }
-    cout << res << endl;
+
+    vvi dp(m + 1, vi(n + 1, 0));
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            dp[i][j] = grid[i][j] + max(dp[i - 1][j], dp[i][j - 1]);
+        }
+        cout << dp[i][n] << " ";
+    }
+    cout << endl;
     return 0;
 }

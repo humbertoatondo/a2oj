@@ -27,25 +27,28 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+    string av, ne;
+    cin >> av >> ne;
+    map<char, ii> ch;
+    for (char c : av) {
+        ch[c].first++;
+    }
+    for (char c : ne) {
+        ch[c].second++;
     }
 
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
+    int total = 0;
+    for (auto p : ch) {
+        if (!p.second.first) {
+            cout << -1 << endl;
+            return 0;
         }
+        if (!p.second.second) {
+            continue;
+        }
+        total += min(p.second.first, p.second.second);
     }
-    cout << res << endl;
+    total = total ? total : -1;
+    cout << total << endl;
     return 0;
 }

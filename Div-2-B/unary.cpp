@@ -27,25 +27,16 @@ void c_p_c()
 int main()
 {
     c_p_c();
-    vii nums;
-    int n;
-    cin >> n;
-    rep (i, n) {
-        int a, b;
-        cin >> a >> b;
-        ii p = make_pair(a, b);
-        nums.push_back(p);
+    unordered_map<char, int> dict { {'>', 8}, {'<', 9}, {'+', 10}, {'-', 11}, {'.', 12}, {',', 13}, {'[', 14}, {']', 15} };
+    string line;
+    cin >> line;
+    int mod = 1000003;
+    int total = 0;
+    for (int i = 0; i < line.size(); i++) {
+        total *= 16;
+        total += dict[line[i]];
+        total %= mod;
     }
-
-    int res = n;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i != j && nums[i].first == nums[j].second) {
-                res--;
-                break;
-            }
-        }
-    }
-    cout << res << endl;
+    cout << total << endl;
     return 0;
 }
