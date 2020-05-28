@@ -5,6 +5,12 @@
         "algorithm": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "iosfwd": "cpp",
+        "bitset": "cpp",
+        "regex": "cpp",
+        "numeric": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp"
     }
 }
